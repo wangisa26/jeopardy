@@ -9,7 +9,6 @@ const NotificationCenter = () => {
   useEffect(() => {
     const websocket = new WebSocket('ws://localhost:1864');
     setWs(websocket);
-
     websocket.onopen = () => console.log('Connected to WebSocket server');
     websocket.onmessage = (event) => {
       console.log(event.data);
@@ -33,13 +32,14 @@ const NotificationCenter = () => {
     else 
     {
       console.log(username);
+      ws.send(username);
     }
   };
 
   return (
     <div className="notification-center">
       <h2>Real-Time Notifications</h2>
-      <div className="messages">
+      <div className="messages"> 
         {messages.map((message, index) => (
           <p key={index}>{message.toString()}</p>
         ))}
